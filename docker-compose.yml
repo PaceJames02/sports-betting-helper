@@ -10,6 +10,11 @@ services:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U user -d sports-betting-helper"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
 
   app:
     build: .
@@ -19,7 +24,8 @@ services:
     environment:
       - DB_URL=postgres://user:password@db:5432/sports-betting-helper?sslmode=disable
     depends_on:
-      - db
+      db:
+        condition: service_healthy
 
 volumes:
   postgres_data: # Persists your data even if the container is deleted

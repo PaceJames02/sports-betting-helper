@@ -13,8 +13,8 @@ import (
 )
 
 func main() {
-	_ = db.InitDb()
-	// defer database.Close() if we had a handle here, but InitDb currently manages its own lifecycle or we can return it
+	database := db.InitDb()
+	defer database.Close()
 
 	lis, err := net.Listen("tcp", ":50051")
 	if err != nil {

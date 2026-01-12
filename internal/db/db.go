@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"time"
 
 	_ "github.com/lib/pq"
 	migrate "github.com/rubenv/sql-migrate"
@@ -17,9 +18,24 @@ func InitDb() *sql.DB {
 		connStr = "postgres://user:password@localhost:5432/my_database?sslmode=disable"
 	}
 
-	db, err := sql.Open("postgres", connStr)
+	var db *sql.DB
+	var err error
+
+	// Retry connecting to the database
+	for i := 0; i < 10; i++ {
+		db, err = sql.Open("postgres", connStr)
+		if err == nil {
+			err = db.Ping()
+			if err == nil {
+				break
+			}
+		}
+		log.Printf("Could not connect to database, retrying in 30 seconds... (%d/10)", i+1)
+		time.Sleep(30 * time.Second)
+	}
+
 	if err != nil {
-		log.Fatal(err)
+		log.Fatalf("Failed to connect to database after 10 attempts: %v", err)
 	}
 
 	migrations := &migrate.FileMigrationSource{
