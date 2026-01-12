@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.6.0
 // - protoc             v6.33.2
-// source: hello-world.proto
+// source: proto/hello-world.proto
 
 package gen
 
@@ -121,5 +121,5 @@ var ChatService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "hello-world.proto",
+	Metadata: "proto/hello-world.proto",
 }

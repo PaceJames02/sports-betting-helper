@@ -2,7 +2,7 @@
 // versions:
 // 	protoc-gen-go v1.36.11
 // 	protoc        v6.33.2
-// source: hello-world.proto
+// source: proto/hello-world.proto
 
 package gen
 
@@ -25,13 +25,14 @@ const (
 type HelloRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	NewName       string                 `protobuf:"bytes,2,opt,name=new_name,json=newName,proto3" json:"new_name,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *HelloRequest) Reset() {
 	*x = HelloRequest{}
-	mi := &file_hello_world_proto_msgTypes[0]
+	mi := &file_proto_hello_world_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -43,7 +44,7 @@ func (x *HelloRequest) String() string {
 func (*HelloRequest) ProtoMessage() {}
 
 func (x *HelloRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_hello_world_proto_msgTypes[0]
+	mi := &file_proto_hello_world_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -56,7 +57,7 @@ func (x *HelloRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use HelloRequest.ProtoReflect.Descriptor instead.
 func (*HelloRequest) Descriptor() ([]byte, []int) {
-	return file_hello_world_proto_rawDescGZIP(), []int{0}
+	return file_proto_hello_world_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *HelloRequest) GetName() string {
@@ -66,17 +67,25 @@ func (x *HelloRequest) GetName() string {
 	return ""
 }
 
+func (x *HelloRequest) GetNewName() string {
+	if x != nil {
+		return x.NewName
+	}
+	return ""
+}
+
 // Response message
 type HelloResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Message       string                 `protobuf:"bytes,1,opt,name=message,proto3" json:"message,omitempty"`
+	SecondMessage string                 `protobuf:"bytes,2,opt,name=second_message,json=secondMessage,proto3" json:"second_message,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *HelloResponse) Reset() {
 	*x = HelloResponse{}
-	mi := &file_hello_world_proto_msgTypes[1]
+	mi := &file_proto_hello_world_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -88,7 +97,7 @@ func (x *HelloResponse) String() string {
 func (*HelloResponse) ProtoMessage() {}
 
 func (x *HelloResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_hello_world_proto_msgTypes[1]
+	mi := &file_proto_hello_world_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -101,7 +110,7 @@ func (x *HelloResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use HelloResponse.ProtoReflect.Descriptor instead.
 func (*HelloResponse) Descriptor() ([]byte, []int) {
-	return file_hello_world_proto_rawDescGZIP(), []int{1}
+	return file_proto_hello_world_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *HelloResponse) GetMessage() string {
@@ -111,36 +120,45 @@ func (x *HelloResponse) GetMessage() string {
 	return ""
 }
 
-var File_hello_world_proto protoreflect.FileDescriptor
-
-const file_hello_world_proto_rawDesc = "" +
-	"\n" +
-	"\x11hello-world.proto\x12\x04chat\"\"\n" +
-	"\fHelloRequest\x12\x12\n" +
-	"\x04name\x18\x01 \x01(\tR\x04name\")\n" +
-	"\rHelloResponse\x12\x18\n" +
-	"\amessage\x18\x01 \x01(\tR\amessage2D\n" +
-	"\vChatService\x125\n" +
-	"\bSayHello\x12\x12.chat.HelloRequest\x1a\x13.chat.HelloResponse\"\x00B\aZ\x05./genb\x06proto3"
-
-var (
-	file_hello_world_proto_rawDescOnce sync.Once
-	file_hello_world_proto_rawDescData []byte
-)
-
-func file_hello_world_proto_rawDescGZIP() []byte {
-	file_hello_world_proto_rawDescOnce.Do(func() {
-		file_hello_world_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_hello_world_proto_rawDesc), len(file_hello_world_proto_rawDesc)))
-	})
-	return file_hello_world_proto_rawDescData
+func (x *HelloResponse) GetSecondMessage() string {
+	if x != nil {
+		return x.SecondMessage
+	}
+	return ""
 }
 
-var file_hello_world_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
-var file_hello_world_proto_goTypes = []any{
+var File_proto_hello_world_proto protoreflect.FileDescriptor
+
+const file_proto_hello_world_proto_rawDesc = "" +
+	"\n" +
+	"\x17proto/hello-world.proto\x12\x04chat\"=\n" +
+	"\fHelloRequest\x12\x12\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\x12\x19\n" +
+	"\bnew_name\x18\x02 \x01(\tR\anewName\"P\n" +
+	"\rHelloResponse\x12\x18\n" +
+	"\amessage\x18\x01 \x01(\tR\amessage\x12%\n" +
+	"\x0esecond_message\x18\x02 \x01(\tR\rsecondMessage2D\n" +
+	"\vChatService\x125\n" +
+	"\bSayHello\x12\x12.chat.HelloRequest\x1a\x13.chat.HelloResponse\"\x00B!Z\x1fsports-betting-helper/proto/genb\x06proto3"
+
+var (
+	file_proto_hello_world_proto_rawDescOnce sync.Once
+	file_proto_hello_world_proto_rawDescData []byte
+)
+
+func file_proto_hello_world_proto_rawDescGZIP() []byte {
+	file_proto_hello_world_proto_rawDescOnce.Do(func() {
+		file_proto_hello_world_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_proto_hello_world_proto_rawDesc), len(file_proto_hello_world_proto_rawDesc)))
+	})
+	return file_proto_hello_world_proto_rawDescData
+}
+
+var file_proto_hello_world_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_proto_hello_world_proto_goTypes = []any{
 	(*HelloRequest)(nil),  // 0: chat.HelloRequest
 	(*HelloResponse)(nil), // 1: chat.HelloResponse
 }
-var file_hello_world_proto_depIdxs = []int32{
+var file_proto_hello_world_proto_depIdxs = []int32{
 	0, // 0: chat.ChatService.SayHello:input_type -> chat.HelloRequest
 	1, // 1: chat.ChatService.SayHello:output_type -> chat.HelloResponse
 	1, // [1:2] is the sub-list for method output_type
@@ -150,26 +168,26 @@ var file_hello_world_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for field type_name
 }
 
-func init() { file_hello_world_proto_init() }
-func file_hello_world_proto_init() {
-	if File_hello_world_proto != nil {
+func init() { file_proto_hello_world_proto_init() }
+func file_proto_hello_world_proto_init() {
+	if File_proto_hello_world_proto != nil {
 		return
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: unsafe.Slice(unsafe.StringData(file_hello_world_proto_rawDesc), len(file_hello_world_proto_rawDesc)),
+			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_hello_world_proto_rawDesc), len(file_proto_hello_world_proto_rawDesc)),
 			NumEnums:      0,
 			NumMessages:   2,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
-		GoTypes:           file_hello_world_proto_goTypes,
-		DependencyIndexes: file_hello_world_proto_depIdxs,
-		MessageInfos:      file_hello_world_proto_msgTypes,
+		GoTypes:           file_proto_hello_world_proto_goTypes,
+		DependencyIndexes: file_proto_hello_world_proto_depIdxs,
+		MessageInfos:      file_proto_hello_world_proto_msgTypes,
 	}.Build()
-	File_hello_world_proto = out.File
-	file_hello_world_proto_goTypes = nil
-	file_hello_world_proto_depIdxs = nil
+	File_proto_hello_world_proto = out.File
+	file_proto_hello_world_proto_goTypes = nil
+	file_proto_hello_world_proto_depIdxs = nil
 }
