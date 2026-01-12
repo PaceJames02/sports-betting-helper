@@ -29,6 +29,7 @@ COPY --from=builder /app/migrations ./migrations
 
 # Expose the port your app runs on
 EXPOSE 8080
+EXPOSE 50051
 
 # Command to run the application
 CMD ["./main"]
