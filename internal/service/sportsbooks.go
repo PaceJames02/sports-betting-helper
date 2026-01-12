@@ -5,16 +5,13 @@ import (
 )
 
 type sportsbookService struct {
+	repo domain.BookmakerRepository
 }
 
-func NewSportsbookService() domain.SportsbookService {
-	return &sportsbookService{}
+func NewSportsbookService(repo domain.BookmakerRepository) domain.SportsbookService {
+	return &sportsbookService{repo: repo}
 }
 
-func (s *sportsbookService) GetBookmakers() ([]domain.Bookmaker, error) {
-	// For now, returning the same hardcoded data but from the service layer
-	return []domain.Bookmaker{
-		{ID: "1", Name: "Bet365", Enabled: false},
-		{ID: "2", Name: "Betfair", Enabled: true},
-	}, nil
+func (s *sportsbookService) GetBookmakers(filter domain.BookmakerFilter) ([]domain.Bookmaker, error) {
+	return s.repo.GetBookmakers(filter)
 }

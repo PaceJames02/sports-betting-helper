@@ -14,7 +14,10 @@ message Bookmaker {
   bool enabled = 3;
 }
 
-message GetBookmakersRequest {}
+message GetBookmakersRequest {
+  optional string id = 1;
+  optional bool enabled = 2;
+}
 
 message GetBookmakersResponse {
   repeated Bookmaker bookmakers = 1;

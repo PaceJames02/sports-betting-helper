@@ -83,6 +83,8 @@ func (x *Bookmaker) GetEnabled() bool {
 
 type GetBookmakersRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            *string                `protobuf:"bytes,1,opt,name=id,proto3,oneof" json:"id,omitempty"`
+	Enabled       *bool                  `protobuf:"varint,2,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -115,6 +117,20 @@ func (x *GetBookmakersRequest) ProtoReflect() protoreflect.Message {
 // Deprecated: Use GetBookmakersRequest.ProtoReflect.Descriptor instead.
 func (*GetBookmakersRequest) Descriptor() ([]byte, []int) {
 	return file_proto_betting_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *GetBookmakersRequest) GetId() string {
+	if x != nil && x.Id != nil {
+		return *x.Id
+	}
+	return ""
+}
+
+func (x *GetBookmakersRequest) GetEnabled() bool {
+	if x != nil && x.Enabled != nil {
+		return *x.Enabled
+	}
+	return false
 }
 
 type GetBookmakersResponse struct {
@@ -169,8 +185,13 @@ const file_proto_betting_proto_rawDesc = "" +
 	"\tBookmaker\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x18\n" +
-	"\aenabled\x18\x03 \x01(\bR\aenabled\"\x16\n" +
-	"\x14GetBookmakersRequest\"K\n" +
+	"\aenabled\x18\x03 \x01(\bR\aenabled\"]\n" +
+	"\x14GetBookmakersRequest\x12\x13\n" +
+	"\x02id\x18\x01 \x01(\tH\x00R\x02id\x88\x01\x01\x12\x1d\n" +
+	"\aenabled\x18\x02 \x01(\bH\x01R\aenabled\x88\x01\x01B\x05\n" +
+	"\x03_idB\n" +
+	"\n" +
+	"\b_enabled\"K\n" +
 	"\x15GetBookmakersResponse\x122\n" +
 	"\n" +
 	"bookmakers\x18\x01 \x03(\v2\x12.betting.BookmakerR\n" +
@@ -213,6 +234,7 @@ func file_proto_betting_proto_init() {
 	if File_proto_betting_proto != nil {
 		return
 	}
+	file_proto_betting_proto_msgTypes[1].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

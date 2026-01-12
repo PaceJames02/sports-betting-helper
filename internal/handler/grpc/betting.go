@@ -18,7 +18,15 @@ func NewBettingHandler(s domain.SportsbookService) *BettingHandler {
 }
 
 func (h *BettingHandler) GetBookies(ctx context.Context, in *pb.GetBookmakersRequest) (*pb.GetBookmakersResponse, error) {
-	bookmakers, err := h.sportsbookService.GetBookmakers()
+	filter := domain.BookmakerFilter{}
+	if in.Id != nil {
+		filter.ID = in.Id
+	}
+	if in.Enabled != nil {
+		filter.Enabled = in.Enabled
+	}
+
+	bookmakers, err := h.sportsbookService.GetBookmakers(filter)
 	if err != nil {
 		return nil, err
 	}

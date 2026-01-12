@@ -5,6 +5,7 @@ import (
 	"net"
 	"sports-betting-helper/internal/db"
 	handler "sports-betting-helper/internal/handler/grpc"
+	"sports-betting-helper/internal/repository"
 	"sports-betting-helper/internal/service"
 	pb "sports-betting-helper/proto/gen"
 
@@ -22,7 +23,8 @@ func main() {
 	}
 
 	s := grpc.NewServer()
-	sportsbookService := service.NewSportsbookService()
+	bookmakerRepo := repository.NewBookmakerRepository(database)
+	sportsbookService := service.NewSportsbookService(bookmakerRepo)
 	bettingHandler := handler.NewBettingHandler(sportsbookService)
 	pb.RegisterBettingServiceServer(s, bettingHandler)
 	reflection.Register(s)

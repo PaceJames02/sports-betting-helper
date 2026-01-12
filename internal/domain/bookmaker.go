@@ -6,6 +6,15 @@ type Bookmaker struct {
 	Enabled bool
 }
 
+type BookmakerFilter struct {
+	ID      *string
+	Enabled *bool
+}
+
+type BookmakerRepository interface {
+	GetBookmakers(filter BookmakerFilter) ([]Bookmaker, error)
+}
+
 type SportsbookService interface {
-	GetBookmakers() ([]Bookmaker, error)
+	GetBookmakers(filter BookmakerFilter) ([]Bookmaker, error)
 }
