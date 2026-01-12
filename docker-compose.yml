@@ -15,6 +15,7 @@ services:
     build: .
     ports:
       - "8080:8080"
+      - "50051:50051"
     environment:
       - DB_URL=postgres://user:password@db:5432/sports-betting-helper?sslmode=disable
     depends_on:
