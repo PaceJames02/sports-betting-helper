@@ -13,7 +13,7 @@ COPY . .
 
 # Build the application
 # CGO_ENABLED=0 creates a statically linked binary (better for containers)
-RUN CGO_ENABLED=0 GOOS=linux go build -o main .
+RUN CGO_ENABLED=0 GOOS=linux go build -o server ./cmd/server
 
 # --- Stage 2: Final Image ---
 FROM alpine:latest
@@ -24,7 +24,7 @@ RUN apk --no-cache add ca-certificates
 WORKDIR /root/
 
 # Copy the compiled binary and migrations directory from the builder stage
-COPY --from=builder /app/main .
+COPY --from=builder /app/server .
 COPY --from=builder /app/migrations ./migrations
 
 # Expose the port your app runs on
@@ -32,4 +32,4 @@ EXPOSE 8080
 EXPOSE 50051
 
 # Command to run the application
-CMD ["./main"]
+CMD ["./server"]

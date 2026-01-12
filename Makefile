@@ -9,4 +9,7 @@ up:
 down:
 	docker-compose down
 
+down-all:
+	docker-compose down -v
+
 .PHONY: generate up down
